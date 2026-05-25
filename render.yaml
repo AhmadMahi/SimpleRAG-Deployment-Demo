@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: basic-rag-fastapi
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PINECONE_API_KEY
+        sync: false
+      - key: PINECONE_INDEX
+        value: basic-rag-index
+      - key: PINECONE_NAMESPACE
+        value: default
+      - key: PINECONE_CLOUD
+        value: aws
+      - key: PINECONE_REGION
+        value: us-east-1
+      - key: MLFLOW_TRACKING_URI
+        value: mlruns
+      - key: MLFLOW_EXPERIMENT
+        value: basic-rag

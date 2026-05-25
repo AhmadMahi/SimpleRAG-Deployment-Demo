@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+*.so
+
+.env
+.venv/
+venv/
+
+uploads/*
+!uploads/.gitkeep
+
+data/state.json
+
+mlruns/
+
+.DS_Store

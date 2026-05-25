@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BasicRAG Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <div class="background-glow glow-a"></div>
+    <div class="background-glow glow-b"></div>
+
+    <main class="shell">
+      <header class="topbar fade-in">
+        <div>
+          <p class="eyebrow">FASTAPI + PINECONE + MLFLOW</p>
+          <h1>BasicRAG Studio</h1>
+        </div>
+        <div id="healthBadge" class="health-badge">Checking system...</div>
+      </header>
+
+      <section class="layout">
+        <aside class="panel controls fade-in-delay-1">
+          <h2>Setup</h2>
+
+          <label class="field-label" for="apiKeyInput">Your OpenAI API Key</label>
+          <input
+            id="apiKeyInput"
+            type="password"
+            placeholder="sk-..."
+            autocomplete="off"
+          />
+          <p class="hint">Used for GPT-4o-mini and text-embedding-3-small. Stored only in your browser.</p>
+
+          <form id="uploadForm" class="stacked-form">
+            <label class="field-label" for="fileInput">Upload PDF, CSV, or TXT</label>
+            <input id="fileInput" type="file" accept=".pdf,.csv,.txt" required />
+            <button type="submit" class="btn-primary">Upload and Index</button>
+          </form>
+          <p id="uploadStatus" class="status-line">No uploads yet.</p>
+
+          <div class="panel-divider"></div>
+
+          <div class="inline-head">
+            <h3>Document History</h3>
+            <button id="refreshDocsBtn" class="btn-ghost" type="button">Refresh</button>
+          </div>
+
+          <label class="toggle-row">
+            <input id="useAllDocs" type="checkbox" checked />
+            <span>Talk to all documents</span>
+          </label>
+
+          <div id="documentsList" class="documents-list"></div>
+
+          <div class="cache-tools">
+            <button id="clearCacheBtn" class="btn-ghost" type="button">Clear Cache</button>
+            <p id="cacheStatus" class="hint">Cache entries: 0</p>
+          </div>
+        </aside>
+
+        <section class="panel chat-panel fade-in-delay-2">
+          <div id="messages" class="messages"></div>
+
+          <form id="chatForm" class="chat-form">
+            <textarea
+              id="questionInput"
+              rows="3"
+              placeholder="Ask a question about your selected documents..."
+              required
+            ></textarea>
+            <button id="askBtn" class="btn-primary" type="submit">Ask</button>
+          </form>
+        </section>
+
+        <aside class="panel history-panel fade-in-delay-3">
+          <div class="inline-head">
+            <h2>Recent Topics</h2>
+            <button id="refreshHistoryBtn" class="btn-ghost" type="button">Refresh</button>
+          </div>
+          <div id="conversationList" class="conversation-list"></div>
+        </aside>
+      </section>
+    </main>
+
+    <div id="toastHost" class="toast-host"></div>
+
+    <script src="/static/app.js" defer></script>
+  </body>
+</html>
